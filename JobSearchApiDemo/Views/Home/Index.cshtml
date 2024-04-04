@@ -1,0 +1,51 @@
+﻿@model JobSearchViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center d-flex flex-column">
+    <h1 class="display-4">Job Finder</h1>
+    <div class="search-controls">
+        <form asp-action="Index" method="post">
+            <input name="@(nameof(Model.FormData.SearchPhrase))" asp-for="FormData.SearchPhrase" />
+            <select class="form-input-box" name="@(nameof(Model.FormData.SelectedOccupationGroupId))" asp-for="FormData.SelectedOccupationGroupId" asp-items="@(new SelectList(Model.FormData.OccupationGroups, nameof(SelectListItem.Value), nameof(SelectListItem.Text), Model.FormData.SelectedOccupationGroupId))"></select>
+            <select name="@(nameof(Model.FormData.Limit))" asp-for="FormData.Limit">
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+            </select>
+            <button type="submit">Sök</button>
+        </form>
+    </div>
+    <div class="search-results d-flex flex-column">
+        @if (Model.SearchResult != null && Model.SearchResult.hits.Length > 0)
+        {
+
+            foreach (var job in Model.SearchResult.hits)
+            {
+                <div class="search-result d-flex flex-column">
+                    @{
+                        <div class="d-flex flex-row justify-content-between search-result-header">
+                            <div>@job.occupation_group.label</div>
+                            <div>@job.publication_date</div>
+                        </div>
+                        <h2>@job.headline</h2>
+                        <div>@Html.Raw(@job.description.text_formatted)</div>
+                        <div class="d-flex flex-column employer-box">                            
+                            <div>@job.employer.name</div>
+                            <div>@job.workplace_address.municipality</div>
+                            <div>@job.webpage_url</div>
+                        </div>
+                    }
+                </div>
+            }
+                     
+        }
+        else if (Model.SearchResult != null)
+        {
+            <p>No jobs found!</p>
+        }
+    </div>
+</div>

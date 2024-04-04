@@ -1,0 +1,58 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.search-results
+{
+    row-gap: 5rem;
+    margin-top: 2rem;
+}
+
+.search-result
+{
+    border-width: 1px;
+    border-style: solid;
+    padding: 2rem;
+}
+
+.search-result ul
+{
+    
+
+}
+
+.page-container
+{
+    row-gap: 5rem;
+}
+
+.employer-box
+{
+    font-weight: bold;
+  font-size: larger;
+}
+
+.search-result-header
+{
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
